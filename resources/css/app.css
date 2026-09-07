@@ -1,0 +1,158 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+@source '../**/*.jsx';
+
+@theme {
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-heading: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+
+    --color-brand-50: #eff6ff;
+    --color-brand-100: #dbeafe;
+    --color-brand-500: #2563eb;
+    --color-brand-600: #1d4ed8;
+    --color-brand-700: #1e40af;
+    --color-brand-800: #1e3a8a;
+    --color-brand-900: #172554;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6, .brand-title, .font-heading {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.clean-card, .glass-card {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+}
+.dark .clean-card, .dark .glass-card {
+    background-color: #0f172a;
+    border: 1px solid #1e293b;
+}
+
+/* Custom Animations from Original Design */
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes heroSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(24px) scale(0.97);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes avatarGlowPulse {
+    0%, 100% {
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.4), 0 0 35px rgba(59, 130, 246, 0.6);
+        border-color: rgba(255, 255, 255, 0.6);
+    }
+    50% {
+        box-shadow: 0 0 28px rgba(255, 255, 255, 0.9), 0 0 50px rgba(147, 197, 253, 0.9);
+        border-color: rgba(255, 255, 255, 1);
+    }
+}
+
+@keyframes rotateCircularText {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes sparkleFloat {
+    0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+    50% { transform: translateY(-8px) rotate(15deg) scale(1.1); }
+}
+
+@keyframes shimmerReflection {
+    0% { transform: translateX(-100%) skewX(-15deg); }
+    100% { transform: translateX(200%) skewX(-15deg); }
+}
+
+@keyframes logoAestheticPulse {
+    0% {
+        transform: translateY(10px) scale(0.9);
+        filter: drop-shadow(0 0 15px rgba(37, 99, 235, 0.3));
+        opacity: 0.3;
+    }
+    50% {
+        transform: translateY(-8px) scale(1.06);
+        filter: drop-shadow(0 0 35px rgba(37, 99, 235, 0.8));
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0px) scale(1);
+        filter: drop-shadow(0 0 20px rgba(37, 99, 235, 0.5));
+        opacity: 1;
+    }
+}
+
+@keyframes ringSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.hero-animated-card {
+    background: linear-gradient(-45deg, #1e40af, #2563eb, #4f46e5, #3b82f6);
+    background-size: 300% 300%;
+    animation: gradientFlow 10s ease infinite, heroSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.avatar-glow {
+    animation: avatarGlowPulse 3.5s ease-in-out infinite;
+}
+
+.animate-rotating-text {
+    animation: rotateCircularText 14s linear infinite;
+    transform-origin: center center;
+}
+
+.sparkle-float {
+    animation: sparkleFloat 4s ease-in-out infinite;
+}
+
+.shimmer-light-bar {
+    animation: shimmerReflection 6s ease-in-out infinite;
+}
+
+.animate-logo-splash {
+    animation: logoAestheticPulse 1.6s cubic-bezier(0.34, 1.56, 0.64, 1) infinite alternate;
+}
+
+.ring-spinner {
+    animation: ringSpin 1.2s linear infinite;
+}
+
+@media (max-width: 767px) {
+    main {
+        padding-bottom: 5rem;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 9999px;
+}
+.dark ::-webkit-scrollbar-thumb {
+    background: #334155;
+}
