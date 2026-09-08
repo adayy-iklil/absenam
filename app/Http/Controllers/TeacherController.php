@@ -106,7 +106,7 @@ class TeacherController extends Controller
         $attendances = $query->latest('time')->paginate(15)->withQueryString();
         $classes = Classes::all();
 
-        return view('teacher.attendance', compact('attendances', 'classes', 'teacher'));
+        return view('teacher.attendance_list', compact('attendances', 'classes', 'teacher'));
     }
 
 
@@ -172,7 +172,7 @@ class TeacherController extends Controller
 
         $prayerAttendances = $query->latest('time')->paginate(15)->withQueryString();
 
-        return view('teacher.prayer', compact('prayerAttendances', 'teacher'));
+        return view('teacher.prayer_list', compact('prayerAttendances', 'teacher'));
     }
 
 
