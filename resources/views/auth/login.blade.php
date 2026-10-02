@@ -187,21 +187,6 @@
                 </button>
             </form>
 
-            <!-- Quick Demo Login Section (Guru & Siswa) -->
-            <div class="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800">
-                <p class="text-xs font-semibold text-slate-500 dark:text-slate-400 text-center uppercase tracking-wider mb-3">
-                    Akses Cepat Demo Login:
-                </p>
-                <div class="grid grid-cols-2 gap-2.5">
-                    <button type="button" onclick="fillDemoLogin('budi.guru@absenam.sch.id', 'Rahasia6#')" class="py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold text-center border border-slate-200 dark:border-slate-700 transition-all">
-                        Guru Demo
-                    </button>
-                    <button type="button" onclick="fillDemoLogin('20357', 'Rahasia6#')" class="py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold text-center border border-slate-200 dark:border-slate-700 transition-all">
-                        Siswa Demo
-                    </button>
-                </div>
-            </div>
-
         </div>
 
         <!-- Footer Notice -->
@@ -211,11 +196,6 @@
     </div>
 
     <script>
-        function fillDemoLogin(email, password) {
-            document.getElementById('email').value = email;
-            document.getElementById('password').value = password;
-            document.querySelector('form').submit();
-        }
         // Splash Screen Control: Show ONLY once when opening website for the first time in browser session
         window.addEventListener('DOMContentLoaded', () => {
             const progressBar = document.getElementById('splashProgressBar');

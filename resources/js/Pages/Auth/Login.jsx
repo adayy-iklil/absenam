@@ -57,24 +57,6 @@ export default function Login() {
         post('/login');
     };
 
-    const handleDemoLogin = (emailVal, passwordVal) => {
-        setData({
-            email: emailVal,
-            password: passwordVal,
-            remember: false,
-        });
-
-        setTimeout(() => {
-            post('/login', {
-                data: {
-                    email: emailVal,
-                    password: passwordVal,
-                    remember: false,
-                }
-            });
-        }, 100);
-    };
-
     return (
         <div className="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen flex items-center justify-center p-4 transition-colors duration-200 relative">
             
@@ -207,38 +189,6 @@ export default function Login() {
                             {processing ? 'Memproses...' : 'Login'}
                         </button>
                     </form>
-
-                    {/* Quick Demo Login Actions Section (Clean Text without Icons) */}
-                    <div className="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800">
-                        <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 text-center uppercase tracking-wider mb-3">
-                            Akses Cepat Demo Login:
-                        </p>
-                        <div className="grid grid-cols-3 gap-2">
-                            <button
-                                type="button"
-                                onClick={() => handleDemoLogin('admin@absenam.sch.id', 'Rahasia6#')}
-                                className="py-2.5 px-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold text-center border border-slate-200 dark:border-slate-700 transition-all"
-                            >
-                                Super Admin
-                            </button>
-
-                            <button
-                                type="button"
-                                onClick={() => handleDemoLogin('budi.guru@absenam.sch.id', 'Rahasia6#')}
-                                className="py-2.5 px-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold text-center border border-slate-200 dark:border-slate-700 transition-all"
-                            >
-                                Guru Demo
-                            </button>
-
-                            <button
-                                type="button"
-                                onClick={() => handleDemoLogin('20357', 'Rahasia6#')}
-                                className="py-2.5 px-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold text-center border border-slate-200 dark:border-slate-700 transition-all"
-                            >
-                                Siswa Demo
-                            </button>
-                        </div>
-                    </div>
 
                 </div>
 
