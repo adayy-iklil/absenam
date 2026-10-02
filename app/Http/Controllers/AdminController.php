@@ -39,14 +39,32 @@ class AdminController extends Controller
         $departments = Department::withCount(['students'])->get();
         $deptLabels = [];
         $deptCounts = [];
+        $deptStats = [];
+        $deptColors = ['#3b82f6', '#8b5cf6', '#10b981', '#f59e0b', '#ec4899', '#f97316'];
+        $idx = 0;
+
         foreach ($departments as $dept) {
             $deptLabels[] = $dept->code;
-            $deptCounts[] = Attendance::where('date', $today)
+            $count = Attendance::where('date', $today)
                 ->whereHas('student', function ($q) use ($dept) {
                     $q->where('department_id', $dept->id);
                 })
                 ->whereIn('status', ['Hadir', 'Terlambat'])
                 ->count();
+            
+            $deptCounts[] = $count;
+            $totalInDept = $dept->students_count ?: 0;
+            $pct = $totalInDept > 0 ? round(($count / $totalInDept) * 100) : 0;
+            
+            $deptStats[] = [
+                'name' => $dept->name,
+                'code' => $dept->code,
+                'attended' => $count,
+                'total' => $totalInDept,
+                'percentage' => $pct,
+                'color' => $deptColors[$idx % count($deptColors)]
+            ];
+            $idx++;
         }
 
         // Chart Data: Monthly trends
@@ -66,6 +84,7 @@ class AdminController extends Controller
             'countAlpha',
             'deptLabels',
             'deptCounts',
+            'deptStats',
             'months',
             'monthlyHadir'
         ));

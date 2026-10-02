@@ -95,15 +95,22 @@ export default function AdminDashboard({
                 </div>
 
                 {/* Department Stats */}
-                <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
-                    <h3 className="font-heading font-semibold text-lg text-slate-900 dark:text-white mb-4">
-                        Absensi per Jurusan Hari Ini
-                    </h3>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
+                <div className="bg-white dark:bg-slate-900 rounded-3xl p-4 sm:p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div className="flex items-center justify-between mb-4">
+                        <h3 className="font-heading font-semibold text-base sm:text-lg text-slate-900 dark:text-white">
+                            Absensi per Jurusan Hari Ini
+                        </h3>
+                        <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-brand-50 dark:bg-brand-950/60 text-brand-600 dark:text-brand-400 border border-brand-200 dark:border-brand-800">
+                            {deptCounts?.reduce((a, b) => a + b, 0) || 0} Hadir
+                        </span>
+                    </div>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2.5">
                         {deptLabels?.map((code, idx) => (
-                            <div key={code} className="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-2xl border border-slate-200 dark:border-slate-700 text-center">
+                            <div key={code} className="p-3 bg-slate-50 dark:bg-slate-800/60 rounded-2xl border border-slate-200/80 dark:border-slate-700/80 text-center">
                                 <span className="text-xs font-bold text-brand-600 dark:text-brand-400 block uppercase">{code}</span>
-                                <span className="text-lg font-bold text-slate-900 dark:text-white mt-1 block">{deptCounts[idx] || 0} Siswa</span>
+                                <span className="text-base sm:text-lg font-bold text-slate-900 dark:text-white mt-1 block">
+                                    {deptCounts[idx] || 0} <span className="text-xs font-normal text-slate-400">Siswa</span>
+                                </span>
                             </div>
                         ))}
                     </div>

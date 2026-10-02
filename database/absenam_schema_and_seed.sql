@@ -226,7 +226,6 @@ INSERT INTO `roles` (`id`, `name`, `display_name`) VALUES
 
 INSERT INTO `departments` (`id`, `code`, `name`) VALUES
 (1, 'RPL', 'Rekayasa Perangkat Lunak'),
-(2, 'TKJ', 'Teknik Komputer & Jaringan'),
 (3, 'DKV', 'Desain Komunikasi Visual'),
 (4, 'AKL', 'Akuntansi & Keuangan Lembaga'),
 (5, 'MP', 'Manajemen Perkantoran'),
@@ -277,8 +276,7 @@ INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `password`) VALUES
 (2, 2, 'Budi Santoso, S.Pd.', 'budi.guru@absenam.sch.id', '$2y$12$9ppaO.49Wp6G.EPaJIvILufGLiblnizQN/VGPiTUrAg0XreoZi0sS'),
 (3, 2, 'Siti Rahma, M.Kom.', 'siti.guru@absenam.sch.id', '$2y$12$9ppaO.49Wp6G.EPaJIvILufGLiblnizQN/VGPiTUrAg0XreoZi0sS'),
 (4, 3, 'Demo Siswa RPL', 'ahmad.siswa@absenam.sch.id', '$2y$12$9ppaO.49Wp6G.EPaJIvILufGLiblnizQN/VGPiTUrAg0XreoZi0sS'),
-(5, 3, 'Demo Siswi RPL', 'dewi.siswa@absenam.sch.id', '$2y$12$9ppaO.49Wp6G.EPaJIvILufGLiblnizQN/VGPiTUrAg0XreoZi0sS'),
-(6, 3, 'Demo Siswa TKJ', 'fadhil.siswa@absenam.sch.id', '$2y$12$9ppaO.49Wp6G.EPaJIvILufGLiblnizQN/VGPiTUrAg0XreoZi0sS');
+(5, 3, 'Demo Siswi RPL', 'dewi.siswa@absenam.sch.id', '$2y$12$9ppaO.49Wp6G.EPaJIvILufGLiblnizQN/VGPiTUrAg0XreoZi0sS');
 
 INSERT INTO `teachers` (`id`, `user_id`, `nip`, `name`, `gender`, `department_id`, `teacher_class_id`, `phone`) VALUES
 (1, 2, '198503152010011002', 'Budi Santoso, S.Pd.', 'L', 1, 9, '081234567890'),

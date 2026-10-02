@@ -49,13 +49,54 @@
     <!-- Analytics Charts Grid -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-        <!-- Chart 1: Attendance by Department -->
-        <div class="glass-card rounded-3xl p-6 border border-slate-200 dark:border-slate-800">
-            <h3 class="text-base font-extrabold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
-                <i class="fa-solid fa-chart-pie text-brand-600"></i> Absensi Hari Ini per Jurusan
-            </h3>
-            <div class="h-64">
-                <canvas id="deptChart"></canvas>
+        <!-- Chart 1: Attendance by Department (Responsive & Mobile-Optimized) -->
+        <div class="glass-card rounded-3xl p-4 sm:p-6 border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
+            <div>
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+                        <i class="fa-solid fa-chart-pie text-brand-600"></i> Absensi Hari Ini per Jurusan
+                    </h3>
+                    <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-brand-50 dark:bg-brand-950/60 text-brand-600 dark:text-brand-400 border border-brand-200 dark:border-brand-800">
+                        {{ array_sum($deptCounts) }} Hadir
+                    </span>
+                </div>
+
+                <!-- Donut Chart Container -->
+                <div class="relative h-48 sm:h-56 w-full flex items-center justify-center my-1">
+                    <canvas id="deptChart"></canvas>
+                    <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                        <span class="text-2xl font-black text-slate-900 dark:text-white leading-none">{{ array_sum($deptCounts) }}</span>
+                        <span class="text-[10px] font-semibold text-slate-400 uppercase mt-0.5 tracking-wider">Total Hadir</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Department Breakdown Cards (Clean, Readable on Mobile) -->
+            <div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+                <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2.5">
+                    Rincian Kehadiran per Jurusan:
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    @foreach($deptStats as $ds)
+                    <div class="p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 flex items-center justify-between gap-2.5">
+                        <div class="flex items-center gap-2.5 min-w-0">
+                            <span class="w-3 h-3 rounded-full flex-shrink-0 shadow-sm" style="background-color: {{ $ds['color'] }};"></span>
+                            <div class="min-w-0">
+                                <span class="font-bold text-xs text-slate-900 dark:text-white block">{{ $ds['code'] }}</span>
+                                <span class="text-[10px] text-slate-500 dark:text-slate-400 block truncate max-w-[140px] sm:max-w-[110px]">{{ $ds['name'] }}</span>
+                            </div>
+                        </div>
+                        <div class="text-right flex-shrink-0">
+                            <div class="font-extrabold text-xs text-slate-900 dark:text-white">
+                                {{ $ds['attended'] }} <span class="text-[10px] font-normal text-slate-400">/ {{ $ds['total'] }}</span>
+                            </div>
+                            <span class="text-[10px] font-semibold text-brand-600 dark:text-brand-400">
+                                {{ $ds['percentage'] }}%
+                            </span>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
             </div>
         </div>
 
@@ -164,16 +205,45 @@
 
 @push('scripts')
 <script>
+    const deptLabels = {!! json_encode($deptLabels) !!};
+    const deptCounts = {!! json_encode($deptCounts) !!};
+    const deptColors = ['#3b82f6', '#8b5cf6', '#10b981', '#f59e0b', '#ec4899', '#f97316'];
+    const totalDeptAttendance = deptCounts.reduce((a, b) => a + b, 0);
+
+    const chartData = totalDeptAttendance > 0 ? deptCounts : deptLabels.map(() => 1);
+    const chartColors = totalDeptAttendance > 0 ? deptColors : deptLabels.map(() => '#cbd5e1');
+
     new Chart(document.getElementById('deptChart').getContext('2d'), {
         type: 'doughnut',
         data: {
-            labels: {!! json_encode($deptLabels) !!},
+            labels: deptLabels,
             datasets: [{
-                data: {!! json_encode($deptCounts) !!},
-                backgroundColor: ['#2563eb', '#10b981', '#f59e0b', '#8b5cf6']
+                data: chartData,
+                backgroundColor: chartColors,
+                borderWidth: 2,
+                borderColor: document.documentElement.classList.contains('dark') ? '#0f172a' : '#ffffff',
+                hoverOffset: 4
             }]
         },
-        options: { responsive: true, maintainAspectRatio: false }
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            if (totalDeptAttendance === 0) return ' Belum ada data absensi hari ini';
+                            const val = deptCounts[context.dataIndex] || 0;
+                            return ` ${context.label}: ${val} Siswa Hadir`;
+                        }
+                    }
+                }
+            },
+            cutout: '72%'
+        }
     });
 
     new Chart(document.getElementById('monthlyChart').getContext('2d'), {
