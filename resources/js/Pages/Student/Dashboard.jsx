@@ -513,16 +513,13 @@ export default function StudentDashboard({
                                         key={st}
                                         type="button"
                                         onClick={() => setSelectedStatus(st)}
-                                        className={`py-2 px-1 rounded-xl text-xs font-bold text-center transition-all ${
+                                        className={`py-2.5 px-2 rounded-xl text-xs font-semibold text-center transition-all ${
                                             selectedStatus === st
-                                                ? st === 'Hadir' ? 'border-2 border-emerald-500 bg-emerald-100 text-emerald-800 shadow-sm' :
-                                                  st === 'Sakit' ? 'border-2 border-amber-500 bg-amber-100 text-amber-800 shadow-sm' :
-                                                  st === 'Izin' ? 'border-2 border-blue-500 bg-blue-100 text-blue-800 shadow-sm' :
-                                                  'border-2 border-rose-500 bg-rose-100 text-rose-800 shadow-sm'
-                                                : 'border border-slate-200 bg-slate-50 text-slate-700 dark:bg-slate-800 dark:text-slate-300 font-semibold'
+                                                ? 'bg-brand-600 text-white shadow-sm border border-brand-600'
+                                                : 'border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 font-medium'
                                         }`}
                                     >
-                                        {st === 'Hadir' ? '🟢 Hadir' : st === 'Sakit' ? '🟡 Sakit' : st === 'Izin' ? '🔵 Izin' : '🔴 Alpha'}
+                                        {st}
                                     </button>
                                 ))}
                             </div>

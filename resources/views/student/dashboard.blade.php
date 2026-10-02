@@ -437,17 +437,17 @@
         <div id="statusSelectionContainer" class="mb-4">
             <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2">Pilih Status Kehadiran:</label>
             <div class="grid grid-cols-4 gap-2">
-                <button type="button" onclick="selectStatus('Hadir')" id="btnStatusHadir" class="status-btn py-2 px-1 rounded-xl border-2 border-emerald-500 bg-emerald-100 text-emerald-800 font-bold text-xs text-center transition-all shadow-sm">
-                    🟢 Hadir
+                <button type="button" onclick="selectStatus('Hadir')" id="btnStatusHadir" class="status-btn py-2.5 px-2 rounded-xl bg-brand-600 text-white font-semibold text-xs text-center transition-all shadow-sm border border-brand-600">
+                    Hadir
                 </button>
-                <button type="button" onclick="selectStatus('Sakit')" id="btnStatusSakit" class="status-btn py-2 px-1 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 dark:bg-slate-800 dark:text-slate-300 text-xs font-semibold text-center transition-all">
-                    🟡 Sakit
+                <button type="button" onclick="selectStatus('Sakit')" id="btnStatusSakit" class="status-btn py-2.5 px-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-medium text-center transition-all hover:bg-slate-100 dark:hover:bg-slate-700">
+                    Sakit
                 </button>
-                <button type="button" onclick="selectStatus('Izin')" id="btnStatusIzin" class="status-btn py-2 px-1 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 dark:bg-slate-800 dark:text-slate-300 text-xs font-semibold text-center transition-all">
-                    🔵 Izin
+                <button type="button" onclick="selectStatus('Izin')" id="btnStatusIzin" class="status-btn py-2.5 px-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-medium text-center transition-all hover:bg-slate-100 dark:hover:bg-slate-700">
+                    Izin
                 </button>
-                <button type="button" onclick="selectStatus('Alpha')" id="btnStatusAlpha" class="status-btn py-2 px-1 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 dark:bg-slate-800 dark:text-slate-300 text-xs font-semibold text-center transition-all">
-                    🔴 Alpha
+                <button type="button" onclick="selectStatus('Alpha')" id="btnStatusAlpha" class="status-btn py-2.5 px-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-medium text-center transition-all hover:bg-slate-100 dark:hover:bg-slate-700">
+                    Alpha
                 </button>
             </div>
             <input type="hidden" id="selectedStatusValue" value="Hadir">
@@ -516,22 +516,14 @@
     function selectStatus(status) {
         document.getElementById('selectedStatusValue').value = status;
         
-        // Reset button styles
+        // Reset button styles to clean neutral
         document.querySelectorAll('.status-btn').forEach(btn => {
-            btn.className = "status-btn py-2 px-1 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 dark:bg-slate-800 dark:text-slate-300 text-xs font-semibold text-center transition-all";
+            btn.className = "status-btn py-2.5 px-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-medium text-center transition-all hover:bg-slate-100 dark:hover:bg-slate-700";
         });
 
         const activeBtn = document.getElementById('btnStatus' + status);
         if (activeBtn) {
-            if (status === 'Hadir') {
-                activeBtn.className = "status-btn py-2 px-1 rounded-xl border-2 border-emerald-500 bg-emerald-100 text-emerald-800 font-bold text-xs text-center transition-all shadow-sm";
-            } else if (status === 'Sakit') {
-                activeBtn.className = "status-btn py-2 px-1 rounded-xl border-2 border-amber-500 bg-amber-100 text-amber-800 font-bold text-xs text-center transition-all shadow-sm";
-            } else if (status === 'Izin') {
-                activeBtn.className = "status-btn py-2 px-1 rounded-xl border-2 border-blue-500 bg-blue-100 text-blue-800 font-bold text-xs text-center transition-all shadow-sm";
-            } else if (status === 'Alpha') {
-                activeBtn.className = "status-btn py-2 px-1 rounded-xl border-2 border-rose-500 bg-rose-100 text-rose-800 font-bold text-xs text-center transition-all shadow-sm";
-            }
+            activeBtn.className = "status-btn py-2.5 px-2 rounded-xl bg-brand-600 text-white font-semibold text-xs text-center transition-all shadow-sm border border-brand-600";
         }
     }
 
